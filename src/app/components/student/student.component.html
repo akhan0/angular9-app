@@ -1,27 +1,27 @@
 <div>
     <p>Student List</p>
     <ul>
-        <li *ngFor="let a of student" (click)="selectStudent(a.id)">{{a.firstName}}</li>
+        <li *ngFor="let a of students" (click)="selectStudent(a.id)">{{a.firstName}}</li>
     </ul>
     <form (ngSubmit)="onSubmit();studentForm.reset();" #studentForm="ngForm">
         <div class="form-group">
             <label for="firsNname">First Name</label>
-            <input type="text" class="form-control" id="firsNname" required [(ngModel)]="firstName" name="firsNname">
+            <input type="text" class="form-control" id="firsNname" required [(ngModel)]="student.firstName" name="firsNname">
         </div>
         <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" required [(ngModel)]="lastName" name="lastName">
+            <input type="text" class="form-control" id="lastName" required [(ngModel)]="student.lastName" name="lastName">
         </div>
         <div class="form-group">
             <label for="age">Age</label>
-            <input type="number" class="form-control" id="age" required [(ngModel)]="age" name="age">
+            <input type="number" min="10" max="50" class="form-control" id="age" required [(ngModel)]="student.age" name="age">
         </div>
         <div class="form-group">
             <label for="dept">Department</label>
-            <input type="text" class="form-control" id="dept" required [(ngModel)]="dept" name="dept">
+            <input type="text" class="form-control" id="dept" required [(ngModel)]="student.dept" name="dept">
         </div>
         <div>
-            <button type="submit">{{btnLabel}}</button>
+            <button type="submit" [disabled]="!studentForm.form.valid">{{btnLabel}}</button>
             <button type="button" class="btn btn-default" (click)="studentForm.reset();resetform();">Reset</button>{{id}}
         </div>
     </form>

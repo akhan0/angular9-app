@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Student } from '../../models/student.model';
+
 
 @Component({
   selector: 'app-student',
@@ -12,45 +14,49 @@ export class StudentComponent implements OnInit {
   age: number;
   dept: string;
   btnLabel = "Add Student";
+  student: Student;
+  students: Student[];
 
-
-  student = [{ id: 1, firstName: 'Adil', lastName: 'khan', age: 34, dept: 'CS' },
-  { id: 2, firstName: 'Arif', lastName: 'khan', age: 34, dept: 'CS' },
-  { id: 3, firstName: 'Hamid', lastName: 'Ali', age: 34, dept: 'CS' },
-  { id: 4, firstName: 'Shayan', lastName: 'Ahmad', age: 34, dept: 'CS' },];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.students = [{ id: 1, firstName: 'Adil', lastName: 'khan', age: 34, dept: 'CS' },
+    { id: 2, firstName: 'Arif', lastName: 'khan', age: 34, dept: 'CS' },
+    { id: 3, firstName: 'Hamid', lastName: 'Ali', age: 34, dept: 'CS' },
+    { id: 4, firstName: 'Shayan', lastName: 'Ahmad', age: 34, dept: 'CS' },];
+    this.student = new Student();
+    console.log(this.student)
   }
+
   resetform() {
-    this.id = 0;
+    this.student.id = 0;
     this.btnLabel = "Add Student";
   }
   onSubmit() {
     if (this.id) {
-      var student = this.student.filter(i => i.id == this.id);
-      if(student.length > 0)
-      {
-        student[0].firstName = this.firstName;
-        student[0].lastName = this.lastName;
-        student[0].age = this.age;
-        student[0].dept = this.dept;
+      var s = this.students.filter(i => i.id == this.id);
+      if (s.length > 0) {
+        s[0].firstName = this.student.firstName;
+        s[0].lastName = this.student.lastName;
+        s[0].age = this.student.age;
+        s[0].dept = this.student.dept;
       }
     }
     else {
       let _id = Math.floor(Math.random() * (1000 - 4 + 1)) + 4;
-      this.student.push({ id: _id, firstName: this.firstName, lastName: this.lastName, age: this.age, dept: this.dept });
+      this.students.push({ id: _id, firstName: this.student.firstName, lastName: this.student.lastName, age: this.student.age, dept: this.student.dept });
     }
   }
   selectStudent(id) {
-    var student = this.student.filter(i => i.id == id);
-    if (student.length > 0) {
-      this.id = student[0].id;
-      this.firstName = student[0].firstName;
-      this.lastName = student[0].lastName;
-      this.age = student[0].age;
-      this.dept = student[0].dept;
+    var s = this.students.filter(i => i.id == id);
+    if (s.length > 0) {
+      this.student.id = s[0].id;
+      this.student.firstName = s[0].firstName;
+      this.student.lastName = s[0].lastName;
+      this.student.age = s[0].age;
+      this.student.dept = s[0].dept;
+      this.student.city = s[0].city;
       this.btnLabel = "Update Student";
     }
   }
