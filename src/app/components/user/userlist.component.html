@@ -1,0 +1,6 @@
+<div>
+    <p>User List</p>
+    <ul>
+        <li *ngFor="let a of users"><a [routerLink]="['../user', a.id]">{{a.firstName}}</a></li>
+    </ul>    
+</div>
