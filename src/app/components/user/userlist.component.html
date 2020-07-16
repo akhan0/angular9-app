@@ -1,7 +1,10 @@
 <div>
+    <p>Selected Users</p>
+    <app-user-detail [users]="selectedUsers"></app-user-detail>
     <p>User List</p>
     <table class="table">
         <tr *ngFor="let a of users">
+            <td><input type="checkbox" [(ngModel)]="a.isChecked" (change)="checkUser()" value={{a.id}}></td>
             <td><img [src]="a.avatar" /></td>
             <td>{{a.first_name}}</td>
             <td>{{a.last_name}}</td>

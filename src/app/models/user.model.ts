@@ -4,4 +4,5 @@ export class User{
     last_name: string;
     avatar?: string;
     email?: string;
+    isChecked?: boolean;
 }

@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserListComponent implements OnInit {  
   users: Array<User> = [];
-
+  selectedUsers: Array<User> = [];
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,7 +22,13 @@ export class UserListComponent implements OnInit {
     // { id: 4, firstName: 'Shayan', lastName: 'Ahmad', age: 34, dept: 'CS' },];
     this.getUser();
   }
-
+  checkUser(){
+    this.selectedUsers = [];
+    this.users.forEach(i => {
+      if(i.isChecked)
+        this.selectedUsers.push(i);
+    })
+  }
   getUser(){
     this.httpClient.get("https://reqres.in/api/users?page=2")
             .subscribe(
