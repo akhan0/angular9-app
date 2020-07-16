@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -8,15 +9,27 @@ import { User } from '../../models/user.model';
   styleUrls: ['./user.component.css']
 })
 export class UserListComponent implements OnInit {  
-  users: User[];
+  users: Array<User> = [];
 
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.users = [{ id: 1, firstName: 'Adil', lastName: 'khan', age: 34, dept: 'CS' },
-    { id: 2, firstName: 'Arif', lastName: 'khan', age: 34, dept: 'CS' },
-    { id: 3, firstName: 'Hamid', lastName: 'Ali', age: 34, dept: 'CS' },
-    { id: 4, firstName: 'Shayan', lastName: 'Ahmad', age: 34, dept: 'CS' },];
+      this.users = [];
+    // this.users = [{ id: 1, firstName: 'Adil', lastName: 'khan', age: 34, dept: 'CS' },
+    // { id: 2, firstName: 'Arif', lastName: 'khan', age: 34, dept: 'CS' },
+    // { id: 3, firstName: 'Hamid', lastName: 'Ali', age: 34, dept: 'CS' },
+    // { id: 4, firstName: 'Shayan', lastName: 'Ahmad', age: 34, dept: 'CS' },];
+    this.getUser();
+  }
+
+  getUser(){
+    this.httpClient.get("https://reqres.in/api/users?page=2")
+            .subscribe(
+              (val: any) => {
+                this.users = val.data;
+              },
+              response => console.log(response)
+              );
   }
 }

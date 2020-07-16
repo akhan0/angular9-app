@@ -7,19 +7,11 @@ import { ActivatedRoute } from '@angular/router';
     template: `
     <div class="form-group">
         <label for="firsNname">First Name</label>
-        <input type="text" class="form-control" id="firsNname" required [value]="user.firstName" name="firsNname">
+        <input type="text" class="form-control" id="firsNname" required [value]="user.first_name" name="firsNname">
     </div>
     <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" required [value]="user.lastName" name="lastName">
-    </div>
-    <div class="form-group">
-        <label for="age">Age</label>
-        <input type="number" min="10" max="50" class="form-control" id="age" required [value]="user.age" name="age">
-    </div>
-    <div class="form-group">
-        <label for="dept">Department</label>
-        <input type="text" class="form-control" id="dept" required [value]="user.dept" name="dept">
+        <input type="text" class="form-control" id="lastName" required [value]="user.last_name" name="lastName">
     </div>`
 })
 
@@ -30,10 +22,7 @@ export class UserComponent implements OnInit {
     btnLabel = "Add User";
     constructor(private route: ActivatedRoute){}
     ngOnInit(): void {
-        this.users = [{ id: 1, firstName: 'Adil', lastName: 'khan', age: 34, dept: 'CS' },
-        { id: 2, firstName: 'Arif', lastName: 'khan', age: 34, dept: 'CS' },
-        { id: 3, firstName: 'Hamid', lastName: 'Ali', age: 34, dept: 'CS' },
-        { id: 4, firstName: 'Shayan', lastName: 'Ahmad', age: 34, dept: 'CS' },];
+        this.users = [];
         this.user = new User();
         this.route.params.subscribe(params => {
             this.id = +params['id']; // (+) converts string 'id' to a number
@@ -49,15 +38,13 @@ export class UserComponent implements OnInit {
         if (this.id) {
           var s = this.users.filter(i => i.id == this.id);
           if (s.length > 0) {
-            s[0].firstName = this.user.firstName;
-            s[0].lastName = this.user.lastName;
-            s[0].age = this.user.age;
-            s[0].dept = this.user.dept;
+            s[0].first_name = this.user.first_name;
+            s[0].last_name = this.user.last_name;
           }
         }
         else {
           let _id = Math.floor(Math.random() * (1000 - 4 + 1)) + 4;
-          this.users.push({ id: _id, firstName: this.user.firstName, lastName: this.user.lastName, age: this.user.age, dept: this.user.dept });
+          this.users.push({ id: _id, first_name: this.user.first_name, last_name: this.user.last_name });
         }
       }
 }

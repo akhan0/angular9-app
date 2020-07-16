@@ -1,6 +1,10 @@
 <div>
     <p>User List</p>
-    <ul>
-        <li *ngFor="let a of users"><a [routerLink]="['../user', a.id]">{{a.firstName}}</a></li>
-    </ul>    
+    <table class="table">
+        <tr *ngFor="let a of users">
+            <td><img [src]="a.avatar" /></td>
+            <td>{{a.first_name}}</td>
+            <td>{{a.last_name}}</td>
+        </tr>
+    </table>    
 </div>
